@@ -25,7 +25,7 @@
   "r2_buckets": [
     {
       "binding": "R2",
-      "bucket_name": "vercel-apline/avatars"
+      "bucket_name": "vercel-apline"
     }
   ]
 
