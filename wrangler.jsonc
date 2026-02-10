@@ -18,14 +18,14 @@
   "d1_databases": [
     {
       "binding": "DB",
-      "database_name": "file-share-app",
-      "database_id": "22241865-2c1d-4be4-8683-5323b9489146"
+      "database_name": "vercel-apline",
+      "database_id": "57d148ba-6608-4654-9d67-6aec62769c6f"
     }
   ],
   "r2_buckets": [
     {
       "binding": "R2",
-      "bucket_name": "file-share-app"
+      "bucket_name": "vercel-apline/avatars"
     }
   ]
 
