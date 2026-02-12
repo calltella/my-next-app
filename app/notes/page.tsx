@@ -7,12 +7,14 @@ import { notes } from "@/db/schema/notes";
 import { drizzle } from "drizzle-orm/d1";
 import { getCloudflareContext } from "@opennextjs/cloudflare";
 
-export default async function NotesPage() {
-  const db = drizzle(
-    (getCloudflareContext().env as any).DB as unknown as D1Database
-  );
+export const dynamic = "force-dynamic";
 
-  const allNotes = await db.select().from(notes);
+import { getAllNotes } from "@/src/routes/service/notes.service";
+
+export default async function NotesPage() {
+
+
+  const allNotes = await getAllNotes();
 
 
 
