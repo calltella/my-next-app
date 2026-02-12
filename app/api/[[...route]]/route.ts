@@ -1,5 +1,11 @@
 // /app/app/api/[[...route]]/route.ts
 
+/**
+ * Hono API拡張
+ * 
+ * 決して内部から呼ばない！
+ */
+
 import { Hono } from "hono";
 import { handle } from "hono/vercel";
 
