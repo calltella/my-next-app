@@ -13,3 +13,10 @@ export const files = sqliteTable("files", {
     .notNull()
     .$defaultFn(() => new Date().toISOString()),
 });
+
+// schemaからTypeを宣言（読み取り用）
+export type File = typeof files.$inferSelect;
+
+// schemaからTypeを宣言（書き込み用）
+export type NewFile = typeof files.$inferInsert;
+
