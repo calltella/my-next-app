@@ -1,13 +1,15 @@
-
+// /app/app/notes/page.tsx
 
 import type { Note } from "@/db/schema/notes";
-import { createNote } from "./actions"
+import { getBaseUrl } from "@/lib/utils/getBaseUrl"
 import { utcFormatDateTimeWithDay } from "@/lib/utils/date"
 
 
 export default async function NotesPage() {
+  const baseUrl = await getBaseUrl();
+  console.log(`baseUrl: ${baseUrl}`)
   const res = await fetch(
-    '/api/notes',
+    `${baseUrl}/api/notes`,
     { cache: "no-store" }
   );
 
