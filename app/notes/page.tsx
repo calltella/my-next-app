@@ -7,7 +7,7 @@ import { utcFormatDateTimeWithDay } from "@/lib/utils/date"
 
 export default async function NotesPage() {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/api/notes`,
+    '/api/notes',
     { cache: "no-store" }
   );
 
