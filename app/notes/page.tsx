@@ -1,30 +1,22 @@
 // /app/app/notes/page.tsx
 
 import type { Note } from "@/db/schema/notes";
-import { getBaseUrl } from "@/lib/utils/getBaseUrl"
 import { utcFormatDateTimeWithDay } from "@/lib/utils/date"
-import { notes } from "@/db/schema/notes";
-import { drizzle } from "drizzle-orm/d1";
-import { getCloudflareContext } from "@opennextjs/cloudflare";
+import { getAllNotes } from "@/src/service/notes.service";
+import { createNote } from "./actions";
 
 export const dynamic = "force-dynamic";
 
-import { getAllNotes } from "@/src/routes/service/notes.service";
-
 export default async function NotesPage() {
 
-
   const allNotes = await getAllNotes();
-
-
 
   return (
     <main className="mx-auto max-w-3xl p-6">
       <h1 className="mb-6 text-2xl font-bold">Notes</h1>
 
       {/* ノート作成フォーム */}
-      <form action="/api/notes/insert"
-        method="post" className="mb-8 space-y-4">
+      <form action={createNote} className="mb-8 space-y-4">
         <div>
           <input
             type="text"
