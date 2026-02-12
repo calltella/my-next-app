@@ -3,17 +3,18 @@
 import type { Note } from "@/db/schema/notes";
 import { getBaseUrl } from "@/lib/utils/getBaseUrl"
 import { utcFormatDateTimeWithDay } from "@/lib/utils/date"
-
+import { notes } from "@/db/schema/notes";
+import { drizzle } from "drizzle-orm/d1";
+import { getCloudflareContext } from "@opennextjs/cloudflare";
 
 export default async function NotesPage() {
-  const baseUrl = await getBaseUrl();
-  console.log(`baseUrl: ${baseUrl}`)
-  const res = await fetch(
-    `${baseUrl}/api/notes`,
-    { cache: "no-store" }
+  const db = drizzle(
+    (getCloudflareContext().env as any).DB as unknown as D1Database
   );
 
-  const notes: Note[] = await res.json();
+  const allNotes = await db.select().from(notes);
+
+
 
   return (
     <main className="mx-auto max-w-3xl p-6">
@@ -48,11 +49,11 @@ export default async function NotesPage() {
       </form>
 
       {/* ノート一覧 */}
-      {notes.length === 0 ? (
+      {allNotes.length === 0 ? (
         <p className="text-gray-500">ノートがありません</p>
       ) : (
         <ul className="space-y-4">
-          {notes.map((f: Note) => (
+          {allNotes.map((f: Note) => (
             <li key={f.id} className="rounded border p-4">
               <h2 className="font-semibold">{f.title}</h2>
               <p className="mt-2 text-gray-700">{f.content}</p>
