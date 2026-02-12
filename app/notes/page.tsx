@@ -18,7 +18,8 @@ export default async function NotesPage() {
       <h1 className="mb-6 text-2xl font-bold">Notes</h1>
 
       {/* ノート作成フォーム */}
-      <form action={createNote} className="mb-8 space-y-4">
+      <form action="/api/notes/insert"
+        method="post" className="mb-8 space-y-4">
         <div>
           <input
             type="text"

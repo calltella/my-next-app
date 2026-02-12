@@ -17,14 +17,13 @@ notesRoute.get("/", async (c) => {
 });
 
 notesRoute.post("/insert", async (c) => {
-  const body = await c.req.json();
-  const { title, content } = body;
-  if (typeof title !== "string" || typeof content !== "string") {
-    return c.json({ error: "Invalid payload" }, 400);
-  }
+  const formData = await c.req.formData();
 
-  if (!title.trim()) {
-    return c.json({ error: "Title is required" }, 400);
+  const title = formData.get("title");
+  const content = formData.get("content");
+
+  if (typeof title !== "string" || typeof content !== "string") {
+    return c.json({ error: "Invalid form data" }, 400);
   }
 
   const db = drizzle(
@@ -36,5 +35,5 @@ notesRoute.post("/insert", async (c) => {
     content,
   });
 
-  return c.json({ success: true });
+  return c.redirect("/notes");
 });
