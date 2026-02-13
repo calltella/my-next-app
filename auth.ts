@@ -75,4 +75,5 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       return session;
     },
   },
+  trustHost: true, // hostを信用する
 });
