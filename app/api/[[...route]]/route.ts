@@ -18,6 +18,8 @@ import { notesRoute } from "@/src/routes/notes/notesRoute"
 
 const app = new Hono().basePath("/api");
 
+console.log(`Hono Routeing`)
+
 // ファイル共有アプリ
 app.route("/files", filesRoute);
 app.route("/upload", uploadRoute);

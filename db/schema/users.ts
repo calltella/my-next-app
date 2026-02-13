@@ -1,13 +1,13 @@
 // /app/db/schema/users.ts
 
 import { sqliteTable, text, integer, index, uniqueIndex, unique } from 'drizzle-orm/sqlite-core';
-import { randomUUID } from "crypto";
+import { relations } from "drizzle-orm";
 import { timestamps } from "./columns.helpers"
 
 export const user = sqliteTable("user", {
   id: text("id")
     .primaryKey()
-    .$defaultFn(() => randomUUID()),
+    .$defaultFn(() => crypto.randomUUID()),
   email: text("email").unique().notNull(),
   name: text("name"),
   avatarUrl: text("avatar_url").default("default.png"),
@@ -24,10 +24,20 @@ export const user = sqliteTable("user", {
 export const account = sqliteTable("account", {
   id: text("id")
     .primaryKey()
-    .$defaultFn(() => randomUUID()),
-  userId: text("user_id").references(() => user.id),
+    .$defaultFn(() => crypto.randomUUID()),
+  userId: text("user_id").notNull()
+    .unique()
+    .references(() => user.id),
   type: text("type").notNull(),
-  colorThemes: text("color_thmemes", {
+  themeMode: text("theme_mode", {
+    enum: [
+      "default",
+      "light",
+      "dark",
+      "system"
+    ]
+  }).default("default"),
+  colorThemes: text("color_themes", {
     enum: [
       "default",
       "blue",
@@ -36,12 +46,13 @@ export const account = sqliteTable("account", {
       "orange"
     ]
   }).default("default"),
-}, (t) => [
-  unique().on(t.userId, t.type)
-])
+});
 
 // references = DBレベルの外部キー制約
 // relations = DrizzleのORMレベルの関連定義（型・JOIN用）
+export const userRelations = relations(user, ({ one }) => ({
+  account: one(account),
+}));
 
 // schemaからTypeを宣言（読み取り用）
 export type User = typeof user.$inferSelect;

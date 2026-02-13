@@ -1,4 +1,5 @@
--- npx wrangler d1 execute vercel-apline --local --file=./db/testdata/user.sql
+
+
 INSERT INTO user (
   id,
   email,
@@ -8,73 +9,105 @@ INSERT INTO user (
   email_verified,
   is_active,
   role,
-  created_at,
-  updated_at
+  updated_at,
+  deleted_at
 ) VALUES
 (
-  '11111111-1111-1111-1111-111111111111',
-  'admin@example.com',
-  'Admin User',
+  'user_001',
+  'alice@example.com',
+  'Alice',
   'default.png',
-  'hashed_password_1',
+  '$2b$10$Wqmu1QFRELZAMWh8/Fq57ONHNrpa/J.rqmtdxQ605x/4ebdJLElUq',
+  datetime('now'),
+  1,
+  'user',
+  datetime('now'),
+  NULL
+),
+(
+  'user_002',
+  'bob@example.com',
+  'Bob',
+  'default.png',
+  '$2b$10$Wqmu1QFRELZAMWh8/Fq57ONHNrpa/J.rqmtdxQ605x/4ebdJLElUq',
   datetime('now'),
   1,
   'admin',
   datetime('now'),
-  datetime('now')
+  NULL
 ),
 (
-  '22222222-2222-2222-2222-222222222222',
-  'user1@example.com',
-  'User One',
+  'user_003',
+  'carol@example.com',
+  'Carol',
   'default.png',
-  'hashed_password_2',
+  '$2b$10$Wqmu1QFRELZAMWh8/Fq57ONHNrpa/J.rqmtdxQ605x/4ebdJLElUq',
   datetime('now'),
   1,
   'user',
   datetime('now'),
-  datetime('now')
+  NULL
 ),
 (
-  '33333333-3333-3333-3333-333333333333',
-  'user2@example.com',
-  'User Two',
+  'user_004',
+  'dave@example.com',
+  'Dave',
   'default.png',
-  'hashed_password_3',
+  '$2b$10$Wqmu1QFRELZAMWh8/Fq57ONHNrpa/J.rqmtdxQ605x/4ebdJLElUq',
+  datetime('now'),
+  0,
+  'user',
+  datetime('now'),
+  NULL
+),
+(
+  'user_005',
+  'eve@example.com',
+  'Eve',
+  'default.png',
+  '$2b$10$Wqmu1QFRELZAMWh8/Fq57ONHNrpa/J.rqmtdxQ605x/4ebdJLElUq',
   datetime('now'),
   1,
   'user',
   datetime('now'),
-  datetime('now')
+  NULL
 );
 
 INSERT INTO account (
   id,
   user_id,
   type,
-  color_thmemes
+  theme_mode,
+  color_themes
 ) VALUES
 (
-  'aaaaaaa1-aaaa-aaaa-aaaa-aaaaaaaaaaa1',
-  '11111111-1111-1111-1111-111111111111',
-  'personal',
-  'purple'
-),
-(
-  'aaaaaaa2-aaaa-aaaa-aaaa-aaaaaaaaaaa2',
-  '22222222-2222-2222-2222-222222222222',
-  'personal',
+  'account_001',
+  'user_001',
+  'basic',
+  'default',
   'blue'
 ),
 (
-  'aaaaaaa3-aaaa-aaaa-aaaa-aaaaaaaaaaa3',
-  '22222222-2222-2222-2222-222222222222',
-  'business',
+  'account_002',
+  'user_002',
+  'premium',  'default',
   'green'
 ),
 (
-  'aaaaaaa4-aaaa-aaaa-aaaa-aaaaaaaaaaa4',
-  '33333333-3333-3333-3333-333333333333',
-  'personal',
+  'account_003',
+  'user_003',
+  'basic',  'default',
+  'purple'
+),
+(
+  'account_004',
+  'user_004',
+  'basic',  'default',
+  'default'
+),
+(
+  'account_005',
+  'user_005',
+  'premium',  'default',
   'orange'
 );

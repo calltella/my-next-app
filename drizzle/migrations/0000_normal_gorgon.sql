@@ -7,22 +7,16 @@ CREATE TABLE `files` (
 	`createdAt` text NOT NULL
 );
 --> statement-breakpoint
-CREATE TABLE `notes` (
-	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
-	`title` text NOT NULL,
-	`content` text,
-	`created_at` text DEFAULT CURRENT_TIMESTAMP NOT NULL
-);
---> statement-breakpoint
 CREATE TABLE `account` (
 	`id` text PRIMARY KEY NOT NULL,
-	`user_id` text,
+	`user_id` text NOT NULL,
 	`type` text NOT NULL,
-	`color_thmemes` text DEFAULT 'default',
+	`theme_mode` text DEFAULT 'default',
+	`color_themes` text DEFAULT 'default',
 	FOREIGN KEY (`user_id`) REFERENCES `user`(`id`) ON UPDATE no action ON DELETE no action
 );
 --> statement-breakpoint
-CREATE UNIQUE INDEX `account_user_id_type_unique` ON `account` (`user_id`,`type`);--> statement-breakpoint
+CREATE UNIQUE INDEX `account_user_id_unique` ON `account` (`user_id`);--> statement-breakpoint
 CREATE TABLE `user` (
 	`id` text PRIMARY KEY NOT NULL,
 	`email` text NOT NULL,
@@ -39,4 +33,10 @@ CREATE TABLE `user` (
 --> statement-breakpoint
 CREATE UNIQUE INDEX `user_email_unique` ON `user` (`email`);--> statement-breakpoint
 CREATE INDEX `name_idx` ON `user` (`name`);--> statement-breakpoint
-CREATE UNIQUE INDEX `email_idx` ON `user` (`email`);
+CREATE UNIQUE INDEX `email_idx` ON `user` (`email`);--> statement-breakpoint
+CREATE TABLE `notes` (
+	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
+	`title` text NOT NULL,
+	`content` text,
+	`created_at` text DEFAULT CURRENT_TIMESTAMP NOT NULL
+);

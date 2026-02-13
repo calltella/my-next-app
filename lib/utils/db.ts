@@ -1,8 +1,9 @@
 import { drizzle } from "drizzle-orm/d1";
 import { getCloudflareContext } from "@opennextjs/cloudflare";
 import type { CloudflareBindings } from "@/src/types/env";
+import * as schema from "@/db/schema";
 
-export type AppDB = ReturnType<typeof drizzle>;
+export type AppDB = ReturnType<typeof drizzle<typeof schema>>;
 
 /**
  * Cloudflare D1 DB instance を取得
@@ -15,5 +16,5 @@ export async function getDB(): Promise<AppDB> {
     throw new Error("D1 binding not found");
   }
 
-  return drizzle((env as CloudflareBindings).DB);
+  return drizzle((env as CloudflareBindings).DB, { schema });
 }
