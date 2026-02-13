@@ -21,6 +21,12 @@ export default function Home() {
       >
         Login
       </Link>
+      <Link
+        href="/logout"
+        className="md:px-4 py-2 block text-(--color-text) hover:text-(--color-secondary)"
+      >
+        Logout
+      </Link>
     </main>
   );
 }
