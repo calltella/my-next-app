@@ -9,6 +9,6 @@ export default auth((req: any) => {
 });
 
 export const config = {
-  runtime: 'edge',
+  // runtime: 'edge', // この行を削除
   matcher: ["/dashboard/:path*"],
 };
