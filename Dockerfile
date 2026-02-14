@@ -22,3 +22,4 @@ EXPOSE 8787
 
 # コンテナ作成
 # docker build -t cloudflare-next .
+# docker run -d --name cloudflare-next --network docker_vercel_network cloudflare-next tail -f /dev/null
